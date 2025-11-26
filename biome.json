@@ -36,9 +36,6 @@
       },
       "a11y": {
         "noStaticElementInteractions": "off"
-      },
-      "nursery": {
-        "useSortedClasses": "error"
       }
     },
     "domains": {
