@@ -22,6 +22,7 @@ import {
 import { Input } from '@/components/ui/input'
 import { Separator } from '@/components/ui/separator'
 import { authClient } from '@/lib/auth-client'
+import { SocialLogins } from './_components/social-logins'
 
 const formSchema = z
   .object({
@@ -62,11 +63,33 @@ export function SignUpView() {
         name,
         email,
         password,
+        callbackURL: '/',
       },
       {
         onSuccess: () => {
           setIsPending(false)
           router.push('/')
+        },
+        onError: ({ error }) => {
+          setError(error.message)
+          setIsPending(false)
+        },
+      },
+    )
+  }
+
+  function onSocial(provider: 'github' | 'google') {
+    setError(null)
+    setIsPending(true)
+
+    authClient.signIn.social(
+      {
+        provider,
+        callbackURL: '/',
+      },
+      {
+        onSuccess: () => {
+          setIsPending(false)
         },
         onError: ({ error }) => {
           setError(error.message)
@@ -185,14 +208,7 @@ export function SignUpView() {
               <Separator className="flex-1" />
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
-              <Button variant="outline" disabled={isPending}>
-                Github
-              </Button>
-              <Button variant="outline" disabled={isPending}>
-                Google
-              </Button>
-            </div>
+            <SocialLogins isPending={isPending} onSocial={onSocial} />
 
             <p className="text-sm text-center">
               Already have an account?{' '}
