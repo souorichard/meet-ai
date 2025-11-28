@@ -218,7 +218,7 @@ export function SignUpView() {
             </p>
           </div>
 
-          <div className="bg-radial from-green-700 to-green-900 relative hidden md:flex md:flex-col md:gap-y-4 md:items-center md:justify-center">
+          <div className="bg-radial from-sidebar-accent to-sidebar relative hidden md:flex md:flex-col md:gap-y-4 md:items-center md:justify-center">
             <Image
               src="/logo.svg"
               width={24}
