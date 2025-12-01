@@ -3,6 +3,7 @@ import { Suspense } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
 import { ErrorState } from '@/components/error-state'
 import { LoadingState } from '@/components/loading-state'
+import { AgentsListHeader } from '@/modules/agents/ui/components/agents-list-header'
 import { AgentsView } from '@/modules/agents/ui/view/agents-view'
 import { getQueryClient, trpc } from '@/trpc/server'
 
@@ -11,26 +12,29 @@ export default async function AgentsPage() {
   void queryClient.prefetchQuery(trpc.agents.getMany.queryOptions())
 
   return (
-    <HydrationBoundary state={dehydrate(queryClient)}>
-      <Suspense
-        fallback={
-          <LoadingState
-            title="Loading agents"
-            description="This may take a few seconds"
-          />
-        }
-      >
-        <ErrorBoundary
+    <>
+      <AgentsListHeader />
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <Suspense
           fallback={
-            <ErrorState
-              title="Failed to load agents"
-              description="Something went wrong, please try again later"
+            <LoadingState
+              title="Loading agents"
+              description="This may take a few seconds"
             />
           }
         >
-          <AgentsView />
-        </ErrorBoundary>
-      </Suspense>
-    </HydrationBoundary>
+          <ErrorBoundary
+            fallback={
+              <ErrorState
+                title="Failed to load agents"
+                description="Something went wrong, please try again later"
+              />
+            }
+          >
+            <AgentsView />
+          </ErrorBoundary>
+        </Suspense>
+      </HydrationBoundary>
+    </>
   )
 }

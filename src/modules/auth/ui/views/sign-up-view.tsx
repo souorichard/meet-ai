@@ -22,7 +22,7 @@ import {
 import { Input } from '@/components/ui/input'
 import { Separator } from '@/components/ui/separator'
 import { authClient } from '@/lib/auth-client'
-import { SocialLogins } from './_components/social-logins'
+import { SocialLogins } from './components/social-logins'
 
 const formSchema = z
   .object({
