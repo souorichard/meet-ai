@@ -179,8 +179,8 @@ export function SignInView() {
           <div className="bg-radial from-sidebar-accent to-sidebar relative hidden md:flex md:flex-col md:gap-y-4 md:items-center md:justify-center">
             <Image
               src="/logo.svg"
-              width={24}
-              height={24}
+              width={96}
+              height={96}
               className="size-24"
               alt="Logo"
             />
