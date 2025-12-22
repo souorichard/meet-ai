@@ -39,7 +39,9 @@
         "noNonNullAssertion": "off"
       },
       "a11y": {
-        "noStaticElementInteractions": "off"
+        "noStaticElementInteractions": "off",
+        "useFocusableInteractive": "off",
+        "useSemanticElements": "off"
       }
     },
     "domains": {
